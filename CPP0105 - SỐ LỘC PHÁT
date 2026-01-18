@@ -1,0 +1,31 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+int main()
+{
+    int test;
+    cin >> test;
+    while (test--)
+    {
+        int a;
+        cin >> a;
+        int tmp, check = 0;
+        while (a != 0)
+        {
+            tmp = a % 10;
+            if (tmp != 0 && tmp != 6 && tmp != 8)
+            {
+                check++;
+            }
+            a /= 10;
+        }
+        if (check != 0)
+        {
+            cout << "NO" << endl;
+        }
+        else
+        {
+            cout << "YES" << endl;
+        }
+    }
+}
