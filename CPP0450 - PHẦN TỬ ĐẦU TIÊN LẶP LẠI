@@ -1,0 +1,32 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include <algorithm>
+#include <vector>
+using namespace std;
+int main()
+{
+    int k;
+    cin >> k;
+    while (k--)
+    {
+        int m, n, x, check = 1, count = 0;
+        cin >> m;
+        map<int, int> mp;
+        for (int i = 0; i < m; i++)
+        {
+            cin >> x;
+            mp[x]++;
+            if (mp[x] == 2 && count == 0)
+            {
+                cout << x << endl;
+                check = 0;
+                ++count;
+                        }
+        }
+        if (check == 1)
+        {
+            cout << -1 << endl;
+        }
+    }
+}
