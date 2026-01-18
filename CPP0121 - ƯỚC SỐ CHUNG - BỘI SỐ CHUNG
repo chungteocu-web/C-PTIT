@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+long long ucln(long long a, long long b)
+{
+    while (b != 0)
+    {
+        int tmp = a % b;
+        a = b;
+        b = tmp;
+    }
+    return a;
+}
+
+int main()
+{
+    int c;
+    cin >> c;
+    while (c--)
+    {
+        long long a, b;
+        cin >> a >> b;
+        long long uc = ucln(a, b), bc = a * b / uc;
+        cout << bc << " " << uc<<endl;
+    }
+}
