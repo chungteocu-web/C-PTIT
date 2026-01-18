@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <iomanip>
+using namespace std;
+long long ucln(long long a, long long b)
+{
+    while (b != 0)
+    {
+        long long tmp = a % b;
+        a = b;
+        b = tmp;
+    }
+    return a;
+}
+struct ThiSinh
+{
+    long long mau, tu;
+};
+void in(struct ThiSinh &A)
+{
+    long long uc = ucln(A.tu, A.mau);
+    cout << A.tu / uc << "/" << A.mau/uc;
+}
+void nhap(struct ThiSinh &A)
+{
+    cin >> A.tu >> A.mau;
+}
+int main()
+{
+    struct ThiSinh A;
+    nhap(A);
+    in(A);
+    return 0;
+}
