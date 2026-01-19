@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a, sum = 0;
+        cin >> a;
+        for (int i = 1; i * i <= a; i++)
+        {
+            if (a % i == 0)
+            {
+                if (i % 2 == 0)
+                {
+                    ++sum;
+                }
+                if ((a / i) % 2 == 0 && a / i != i)
+                    ++sum;
+            }
+        }
+        cout << sum << endl;
+    }
+}
