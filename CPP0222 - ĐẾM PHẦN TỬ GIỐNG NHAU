@@ -1,0 +1,44 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <set>
+using namespace std;
+int main()
+{
+    int m, tmp;
+    cin >> m;
+    while (m--)
+    {
+        int a, sum = 0;
+        cin >> a;
+        vector<int> b;
+        for (int i = 0; i < a; i++)
+        {
+            set<int> x;
+            for (int j = 0; j < a; j++)
+            {
+                cin >> tmp;
+                x.insert(tmp);
+            }
+            for (int l : x)
+            {
+                b.push_back(l);
+            }
+        }
+        sort(b.begin(), b.end());
+        for (int i = 0; i < b.size(); i++)
+        {
+            int count = 1;
+            while (b[i] == b[i - 1])
+            {
+                ++count;
+                i++;
+            }
+            if (count == a)
+            {
+                ++sum;
+            }
+        }
+        cout << sum << endl;
+    }
+}
