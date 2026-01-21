@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a, sum = 0;
+        cin >> a;
+        vector<int> b(a);
+        for (int i = 0; i < a; i++)
+        {
+            cin >> b[i];
+            sum += b[i];
+        }
+        int trai = 0, giua = -1;
+        for (int i = 0; i < b.size(); i++)
+        {
+            int phai = sum - trai - b[i];
+            if (phai == trai)
+            {
+                giua = i + 1;
+                break;
+            }
+            trai += b[i];
+        }
+        cout << giua << endl;
+    }
+}
