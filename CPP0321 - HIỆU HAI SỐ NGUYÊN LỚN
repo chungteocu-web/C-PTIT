@@ -1,0 +1,57 @@
+#include <iostream>
+#include <algorithm>
+#include <set>
+#include <string>
+#include <sstream>
+using namespace std;
+string cong(string a, string b)
+{
+
+    while (a.size() > b.size())
+    {
+        b = "0" + b;
+    }
+    while (a.size() < b.size())
+    {
+        a = "0" + a;
+    }
+    string x, tmp = a;
+    if (a < b)
+    {
+        a = b;
+        b = tmp;
+    }
+    int nho = 0;
+    for (int i = a.size() - 1; i >= 0; i--)
+    {
+        int sum;
+        int so1 = a[i] - '0', so2 = b[i] - '0' + nho;
+        if (so1 >= so2)
+        {
+            sum = so1 - so2;
+            nho = 0;
+        }
+        else
+        {
+            sum = (so1 + 10) - so2;
+            nho = 1;
+        }
+
+        x += (sum + '0');
+    }
+    reverse(x.begin(), x.end());
+    return x;
+}
+int main()
+{
+    int m;
+    cin >> m;
+    cin.ignore();
+    while (m--)
+    {
+        string s1, s2, tmp;
+        cin >> s1 >> s2;
+        tmp = cong(s2, s1);
+        cout << tmp << endl;
+    }
+}
