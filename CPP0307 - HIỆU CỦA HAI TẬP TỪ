@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <set>
+#include <string>
+#include <sstream>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    cin.ignore();
+    while (m--)
+    {
+        string s1, s2, tmp;
+        getline(cin, s1);
+        getline(cin, s2);
+        set<string> xau1, xau2;
+        stringstream ss2(s2);
+        while (ss2 >> tmp)
+        {
+            xau2.insert(tmp);
+        }
+        stringstream ss1(s1);
+        while (ss1 >> tmp)
+        {
+            if (xau2.find(tmp) == xau2.end())
+                xau1.insert(tmp);
+        }
+        for (string x : xau1)
+        {
+            cout << x << " ";
+        }
+        cout << endl;
+    }
+}
