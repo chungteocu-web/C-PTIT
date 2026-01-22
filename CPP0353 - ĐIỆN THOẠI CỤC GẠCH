@@ -1,0 +1,58 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+#include <map>
+using namespace std;
+void nhapmap(map<char, char> &mp)
+{
+    mp['A'] = mp['B'] = mp['C'] = '2';
+    mp['D'] = mp['E'] = mp['F'] = '3';
+    mp['G'] = mp['H'] = mp['I'] = '4';
+    mp['J'] = mp['K'] = mp['L'] = '5';
+    mp['M'] = mp['N'] = mp['O'] = '6';
+    mp['P'] = mp['Q'] = mp['R'] = mp['S'] = '7';
+    mp['T'] = mp['U'] = mp['V'] = '8';
+    mp['W'] = mp['X'] = mp['Y'] = mp['Z'] = '9';
+}
+int doixung(string a)
+{
+    int i = 0, j = a.size() - 1;
+    while (i <= j)
+    {
+        if (a[i] != a[j])
+        {
+            return 0;
+        }
+        i++;
+        j--;
+    }
+    return 1;
+}
+int main()
+{
+    int m;
+    cin >> m;
+    cin.ignore();
+    while (m--)
+    {
+        string a, so;
+        cin >> a;
+        map<char, char> mp;
+        nhapmap(mp);
+        for (int i = 0; i < a.size(); i++)
+        {
+            a[i] = toupper(a[i]);
+            so.push_back(mp[a[i]]);
+        }
+        if (doixung(so))
+        {
+            cout << "YES" << endl;
+        }
+        else
+        {
+            cout << "NO" << endl;
+        }
+    }
+}
