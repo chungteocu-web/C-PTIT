@@ -1,0 +1,62 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+#include <map>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int so;
+        cin >> so;
+        cin.ignore();
+        string a, tmp;
+        getline(cin, a);
+        for (int i = 0; i < a.size(); i++)
+        {
+            a[i] = tolower(a[i]);
+        }
+        vector<string> xau;
+        stringstream ss(a);
+        while (ss >> tmp)
+        {
+            xau.push_back(tmp);
+        }
+        if (so == 1)
+        {
+            xau[xau.size() - 1][0] = toupper(xau[xau.size() - 1][0]);
+            cout << xau[xau.size() - 1] << " ";
+            for (int i = 0; i < xau.size() - 1; i++)
+            {
+                xau[i][0] = toupper(xau[i][0]);
+                cout << xau[i][0];
+                for (int j = 1; j < xau[i].size(); j++)
+                {
+                    cout << xau[i][j];
+                }
+                cout << " ";
+            }
+            cout << endl;
+        }
+        else
+        {
+            for (int i = 1; i < xau.size(); i++)
+            {
+                xau[i][0] = toupper(xau[i][0]);
+                cout << xau[i][0];
+                for (int j = 1; j < xau[i].size(); j++)
+                {
+                    cout << xau[i][j];
+                }
+                cout << " ";
+            }
+            xau[0][0] = toupper(xau[0][0]);
+            cout << xau[0] << " ";
+            cout << endl;
+        }
+    }
+}
