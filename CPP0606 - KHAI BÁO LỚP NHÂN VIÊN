@@ -1,0 +1,36 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <string>
+#include <sstream>
+using namespace std;
+class NhanVien
+{
+private:
+    string stt = "00001";
+    string ten, gioitinh, ngaysinh, que, ma, ngay;
+
+public:
+    friend istream &operator>>(istream &in, NhanVien &nv);
+    friend ostream &operator<<(ostream &out, NhanVien &nv);
+};
+istream &operator>>(istream &in, NhanVien &nv)
+{
+    getline(in, nv.ten);
+    in >> nv.gioitinh >> nv.ngaysinh;
+    cin.ignore(1);
+    getline(in, nv.que);
+    cin >> nv.ma >> nv.ngay;
+    return in;
+}
+ostream &operator<<(ostream &out, NhanVien &nv)
+{
+    out << nv.stt << " " << nv.ten << " " << nv.gioitinh << " " << nv.ngaysinh << " " << nv.que << " " << nv.ma << " " << nv.ngay;
+    return out;
+}
+int main(){
+    NhanVien a;
+    cin >> a;
+    cout << a;
+    return 0;
+}
