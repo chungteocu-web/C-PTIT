@@ -1,0 +1,74 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <sstream>
+using namespace std;
+struct SinhVien
+{
+    string ten, masv, ngaysinh;
+    float GPA;
+};
+void nhap(SinhVien ds[], int n)
+{
+    cin.ignore();
+    for (int i = 0; i < n; i++)
+    {
+        getline(cin, ds[i].ten);
+        getline(cin, ds[i].masv);
+        getline(cin, ds[i].ngaysinh);
+        cin >> ds[i].GPA;
+        cin.ignore();
+    }
+}
+void chuanhoa(SinhVien &a)
+{
+    string tmp;
+    vector<string> xau;
+    for (int i = 0; i < a.ten.size(); i++)
+    {
+        a.ten[i] = tolower(a.ten[i]);
+    }
+    stringstream ss(a.ten);
+    while (ss >> tmp)
+    {
+        xau.push_back(tmp);
+    }
+    a.ten.clear();
+    for (int i = 0; i < xau.size(); i++)
+    {
+        xau[i][0] = toupper(xau[i][0]);
+        a.ten += xau[i];
+        if (i < xau.size() - 1)
+            a.ten += " ";
+    }
+}
+void in(SinhVien ds[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (ds[i].ngaysinh[1] == '/')
+        {
+            ds[i].ngaysinh.insert(0, "0");
+        }
+        if (ds[i].ngaysinh[4] == '/')
+        {
+            ds[i].ngaysinh.insert(3, "0");
+        }
+        if (i < 9)
+            cout << "B20DCCN00";
+        else
+            cout << "B20DCCN0";
+        chuanhoa(ds[i]);
+        cout << i + 1 << " " << ds[i].ten << " " << ds[i].masv << " " << ds[i].ngaysinh << " " << fixed << setprecision(2) << ds[i].GPA << endl;
+    }
+}
+int main(){
+    struct SinhVien ds[50];
+    int N;
+    cin >> N;
+    nhap(ds, N);
+    in(ds, N);
+    return 0;
+}
