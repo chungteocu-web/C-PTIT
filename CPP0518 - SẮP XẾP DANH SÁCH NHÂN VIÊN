@@ -1,0 +1,63 @@
+#include <iostream>
+#include <iomanip>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <sstream>
+using namespace std;
+int dem = 1;
+struct NhanVien
+{
+    string ma, ten, sex, sinh, ngay, thang, nam, que, maso, ngaylm;
+};
+bool sosanh(NhanVien a, NhanVien b)
+{
+    if (a.nam == b.nam)
+    {
+        if (a.ngay == b.ngay)
+            return a.thang < b.thang;
+        else
+            return a.ngay < b.ngay;
+    }
+    return a.nam < b.nam;
+}
+void sapxep(NhanVien ds[], int n)
+{
+    sort(ds, ds + n, sosanh);
+}
+void inds(NhanVien ds[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        cout << ds[i].ma << " " << ds[i].ten << " " << ds[i].sex << " " << ds[i].sinh << " " << ds[i].que << " " << ds[i].maso << " " << ds[i].ngaylm << endl;
+    }
+}
+void nhap(NhanVien &a)
+{
+    scanf("\n");
+    string s;
+    if (dem < 10)
+        s = "0000";
+    else
+        s = "000";
+    s += to_string(dem++);
+    a.ma = s;
+    getline(cin, a.ten);
+    getline(cin, a.sex);
+    getline(cin, a.sinh);
+    getline(cin, a.que);
+    getline(cin, a.maso);
+    getline(cin, a.ngaylm);
+    a.nam = a.sinh.substr(6);
+    a.thang = a.sinh.substr(3, 2);
+    a.ngay = a.sinh.substr(0, 2);
+}
+int main(){
+    struct NhanVien ds[50];
+    int N,i;
+    cin >> N;
+    for(i = 0; i < N; i++) nhap(ds[i]);
+    sapxep(ds, N);
+    inds(ds, N);
+    return 0;
+}
