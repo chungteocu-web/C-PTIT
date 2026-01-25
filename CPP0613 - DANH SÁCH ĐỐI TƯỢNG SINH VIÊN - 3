@@ -1,0 +1,98 @@
+#include <iostream>
+#include <iomanip>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <sstream>
+using namespace std;
+int check = 1;
+class SinhVien
+{
+private:
+    string ma, ten, lop, ngaysinh;
+    float GPA;
+
+public:
+    SinhVien();
+    void chuanhoa()
+    {
+        for (int i = 0; i < ten.size(); i++)
+        {
+            ten[i] = tolower(ten[i]);
+        }
+        vector<string> xau;
+        string tmp;
+        stringstream ss(ten);
+        while (ss >> tmp)
+        {
+            xau.push_back(tmp);
+        }
+        ten.clear();
+        for (int i = 0; i < xau.size(); i++)
+        {
+            xau[i][0] = toupper(xau[i][0]);
+            ten += xau[i];
+            if (i < xau.size() - 1)
+                ten += " ";
+        }
+    }
+    friend bool sosanh(const SinhVien &a, const SinhVien &b);
+    friend istream &operator>>(istream &in, SinhVien &a);
+    friend ostream &operator<<(ostream &out, SinhVien &a);
+};
+SinhVien::SinhVien()
+{
+    ten = "";
+    lop = "";
+    ngaysinh = "";
+    GPA = 0;
+}
+istream &operator>>(istream &in, SinhVien &a)
+{
+    cin >> ws;
+    string s;
+    if (check < 10)
+    {
+        s = "B20DCCN00";
+    }
+    else
+    {
+        s = "B20DCCN0";
+    }
+    s += to_string(check++);
+    a.ma = s;
+    getline(in, a.ten);
+    in >> a.lop >> a.ngaysinh >> a.GPA;
+    return in;
+}
+ostream &operator<<(ostream &out, SinhVien &a)
+{
+    if (a.ngaysinh[1] == '/')
+        a.ngaysinh.insert(0, 1, '0');
+    if (a.ngaysinh[4] == '/')
+        a.ngaysinh.insert(3, 1, '0');
+    a.chuanhoa();
+    out << a.ma << " " << a.ten << " " << a.lop << " " << a.ngaysinh << " " << fixed << setprecision(2) << a.GPA << endl;
+    return out;
+}
+bool sosanh(const SinhVien &a, const SinhVien &b)
+{
+    return a.GPA > b.GPA;
+}
+void sapxep(SinhVien ds[], int n)
+{
+    sort(ds, ds + n, sosanh);
+}
+int main(){
+    SinhVien ds[50];
+    int N, i;
+    cin >> N;
+    for(i=0;i<N;i++){
+        cin >> ds[i];
+    }
+    sapxep(ds, N);
+    for(i=0;i<N;i++){
+        cout << ds[i];
+    }
+    return 0;
+}
