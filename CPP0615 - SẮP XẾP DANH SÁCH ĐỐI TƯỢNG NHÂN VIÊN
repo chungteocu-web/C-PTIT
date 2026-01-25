@@ -1,0 +1,76 @@
+#include <iostream>
+#include <iomanip>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <sstream>
+using namespace std;
+int check = 1;
+class NhanVien
+{
+private:
+    string stt, ten, sex, ngaysinh, que, ma, ngay;
+    int nam, thang, date;
+
+public:
+    friend istream &operator>>(istream &in, NhanVien &a);
+    friend ostream &operator<<(ostream &out, NhanVien &b);
+    friend bool sosanh(const NhanVien &a, const NhanVien &b);
+};
+istream &operator>>(istream &in, NhanVien &a)
+{
+    in >> ws;
+    string s;
+    if (check < 10)
+        s += "0000";
+    else
+        s += "000";
+    s += to_string(check++);
+    a.stt = s;
+    getline(in, a.ten);
+    getline(in, a.sex);
+    getline(in, a.ngaysinh);
+    getline(in, a.que);
+    getline(in, a.ma);
+    in >> a.ngay;
+    a.nam = stoi(a.ngaysinh.substr(6, 4));
+    a.date = stoi(a.ngaysinh.substr(3, 2));
+    a.thang = stoi(a.ngaysinh.substr(0, 2));
+    return in;
+}
+ostream &operator<<(ostream &out, NhanVien &b)
+{
+    out << b.stt << " " << b.ten << " " << b.sex << " " << b.ngaysinh << " " << b.que << " " << b.ma << " " << b.ngay << " " << endl;
+    return out;
+}
+bool sosanh(const NhanVien &a, const NhanVien &b)
+{
+    if (a.nam == b.nam)
+    {
+        if (a.thang == b.thang)
+        {
+            return a.date < b.date;
+        }
+        else
+        {
+            return a.thang < b.thang;
+        }
+    }
+    else
+    {
+        return a.nam < b.nam;
+    }
+}
+void sapxep(NhanVien ds[], int n)
+{
+    sort(ds, ds + n, sosanh);
+}
+int main(){
+    NhanVien ds[50];
+    int N,i;
+    cin >> N;
+    for(i=0;i<N;i++) cin >> ds[i];
+    sapxep(ds, N);
+    for(i=0;i<N;i++) cout << ds[i];
+    return 0;
+}
