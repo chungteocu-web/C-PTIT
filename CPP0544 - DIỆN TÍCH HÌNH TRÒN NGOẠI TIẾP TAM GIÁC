@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <iomanip>
+#include <sstream>
+using namespace std;
+const double PI = 3.141592653589793238;
+struct tamgiac
+{
+    double a, b, c, d, e, f;
+    double AB, BC, AC;
+};
+int check(double a, double b, double c)
+{
+    if (a + b > c && b + c > a && a + c > b)
+    {
+        return 1;
+    }
+    return 0;
+}
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        struct tamgiac t;
+        cin >> t.a >> t.b >> t.c >> t.d >> t.e >> t.f;
+        t.AB = sqrt(pow(t.a - t.c, 2) + pow(t.b - t.d, 2));
+        t.BC = sqrt(pow(t.c - t.e, 2) + pow(t.d - t.f, 2));
+        t.AC = sqrt(pow(t.a - t.e, 2) + pow(t.b - t.f, 2));
+        if (check(t.AB, t.AC, t.BC) == 0)
+        {
+            cout << "INVALID" << endl;
+            continue;
+        }
+        double s = sqrt((t.AC + t.BC + t.AB) * (t.AB + t.BC - t.AC) * (t.AC + t.BC - t.AB) * (t.AB + t.AC - t.BC)) / 4;
+        double R = (t.AB * t.AC * t.BC) / (4 * s);
+        double hinhtron = PI * R * R;
+        cout << fixed << setprecision(3) << hinhtron << endl;
+    }
+}
