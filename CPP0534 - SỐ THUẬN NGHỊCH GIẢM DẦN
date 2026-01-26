@@ -1,0 +1,72 @@
+#include <iostream>
+#include <map>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <sstream>
+using namespace std;
+struct So
+{
+    string x;
+    int s;
+};
+int thuannghich(string s)
+{
+    if (s.size() == 1)
+    {
+        return 0;
+    }
+    int l = 0, r = s.size() - 1;
+    while (l <= r)
+    {
+        if (s[l] != s[r])
+        {
+            return 0;
+        }
+        l++;
+        r--;
+    }
+    return 1;
+}
+
+typedef struct So so;
+bool sosanh(so &a, so &b)
+{
+    if (a.x.size() != b.x.size())
+        return a.x.size() > b.x.size();
+    return a.x > b.x;
+}
+int main()
+{
+    vector<so> ds;
+    string tmp;
+    while (cin >> tmp)
+    {
+        if (thuannghich(tmp))
+        {
+            int k = -1;
+            for (int i = 0; i < ds.size(); i++)
+            {
+                if (tmp == ds[i].x)
+                {
+                    k = i;
+                    break;
+                }
+            }
+            if (k == -1)
+            {
+                so c;
+                c.x = tmp;
+                c.s = 1;
+                ds.push_back(c);
+            }
+            else
+                ds[k].s++;
+        }
+    }
+    sort(ds.begin(), ds.end(), sosanh);
+    for (int i = 0; i < ds.size(); i++)
+    {
+        cout << ds[i].x << " " << ds[i].s << endl;
+    }
+}
