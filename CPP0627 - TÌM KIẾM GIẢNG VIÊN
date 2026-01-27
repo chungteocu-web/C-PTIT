@@ -1,0 +1,75 @@
+#include <iostream>
+#include <map>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <sstream>
+using namespace std;
+int check = 1;
+class GiaoVien
+{
+public:
+    string ma, ten, mon, bomon, tachten;
+    friend istream &operator>>(istream &in, GiaoVien &a)
+    {
+        vector<string> xau;
+        string tmp;
+        if (check < 10)
+            a.ma = ("GV0");
+        else
+            a.ma = "GV";
+        a.ma += to_string(check++);
+        in >> ws;
+        getline(in, a.ten);
+        getline(in, a.mon);
+        string ten1 = a.ten;
+        for (int i = 0; i < ten1.size(); i++)
+        {
+            ten1[i] = tolower(ten1[i]);
+        }
+        a.tachten = ten1;
+        stringstream ss2(a.mon);
+        while (ss2 >> tmp)
+        {
+            xau.push_back(tmp);
+        }
+        for (int i = 0; i < xau.size(); i++)
+        {
+            a.bomon += toupper(xau[i][0]);
+        }
+        return in;
+    }
+    friend ostream &operator<<(ostream &out, const GiaoVien &a)
+    {
+        out << a.ma << " " << a.ten << " " << a.bomon << endl;
+        return out;
+    }
+    friend bool cmp(const GiaoVien &a, const GiaoVien &b);
+};
+int main()
+{
+    int n, m;
+    cin >> n;
+    GiaoVien ds[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> ds[i];
+    }
+    cin >> m;
+    while (m--)
+    {
+        string s, tmp;
+        cin >> s;
+        tmp = s;
+        for (int i = 0; i < s.size(); i++)
+        {
+            s[i] = tolower(s[i]);
+        }
+        cout << "DANH SACH GIANG VIEN THEO TU KHOA " << tmp << ":" << endl;
+        for (int i = 0; i < n; i++)
+        {
+            if (ds[i].tachten.find(s) != string::npos)
+                cout << ds[i];
+        }
+    }
+}
