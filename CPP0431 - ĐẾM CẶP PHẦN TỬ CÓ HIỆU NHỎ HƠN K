@@ -1,0 +1,46 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <cmath>
+using namespace std;
+int binary(vector<int> &a, int x)
+{
+    int l = 0, r = a.size() - 1;
+    while (l <= r)
+    {
+        int mid = (l + r) / 2;
+        if (a[mid] == x)
+            return 1;
+        if (a[mid] < x)
+        {
+            l = mid + 1;
+        }
+        if (a[mid] > x)
+        {
+            r = mid - 1;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int m, n, x;
+    cin >> m;
+    while (m--)
+    {
+        cin >> n >> x;
+        vector<int> a(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        long long check = 0;
+        sort(a.begin(), a.end());
+        for (long long i = 0; i < n; i++)
+        {
+            long long k = lower_bound(a.begin(), a.end(), x + a[i]) - a.begin();
+            check += (k - i - 1);
+        }
+        cout << check << endl;
+    }
+}
