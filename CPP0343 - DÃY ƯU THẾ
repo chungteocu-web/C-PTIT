@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    cin.ignore();
+    while (m--)
+    {
+        int chan = 0, le = 0, count = 0;
+        string a, tmp;
+        getline(cin, a);
+        stringstream s2(a);
+        while (s2 >> tmp)
+        {
+            ++count;
+            int check = stoi(tmp);
+            if (check % 2 == 0)
+            {
+                ++chan;
+            }
+            else
+            {
+                ++le;
+            }
+        }
+        if ((chan < le && count % 2 != 0) || (chan > le && count % 2 == 0))
+        {
+            cout << "YES\n";
+        }
+        else
+            cout << "NO\n";
+    }
+}
