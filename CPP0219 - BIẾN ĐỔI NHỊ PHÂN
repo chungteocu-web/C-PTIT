@@ -1,0 +1,60 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+void dien1(vector<vector<int>> &matran2, int a, int b, int i, int j)
+{
+    for (int k = 0; k < a; k++)
+    {
+        matran2[k][j] = 1;
+    }
+    for (int k = 0; k < b; k++)
+    {
+        matran2[i][k] = 1;
+    }
+}
+void xuly(vector<vector<int>> &matran, int a, int b)
+{
+    vector<vector<int>> matran2(a, vector<int>(b, 0));
+    for (int i = 0; i < a; i++)
+    {
+        for (int j = 0; j < b; j++)
+        {
+            if (matran[i][j] == 1)
+            {
+                dien1(matran2, a, b, i, j);
+            }
+        }
+    }
+    for (int i = 0; i < a; i++)
+    {
+        for (int j = 0; j < b; j++)
+        {
+            cout << matran2[i][j] << " ";
+        }
+        cout << "\n";
+    }
+}
+void nhap(vector<vector<int>> &matran, int a, int b)
+{
+    for (int i = 0; i < a; i++)
+    {
+        for (int j = 0; j < b; j++)
+        {
+            cin >> matran[i][j];
+        }
+    }
+}
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a, b;
+        cin >> a >> b;
+        vector<vector<int>> matran(a, vector<int>(b));
+        nhap(matran, a, b);
+        xuly(matran, a, b);
+    }
+}
