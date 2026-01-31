@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a;
+        cin >> a;
+        int A[a];
+        for (int i = 0; i < a; i++)
+        {
+            cin >> A[i];
+        }
+        sort(A, A + a);
+        for (int i = 0; i < a; i++)
+        {
+            cout << A[i] << " ";
+        }
+        cout << endl;
+    }
+}
