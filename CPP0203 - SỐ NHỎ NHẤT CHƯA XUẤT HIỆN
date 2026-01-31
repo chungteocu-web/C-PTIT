@@ -1,0 +1,37 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+void xuly(int a, int b[])
+{
+    sort(b, b + a);
+    int min = 1;
+    for (int i = 0; i < a; i++)
+    {
+        if (b[i] > 0)
+        {
+            if (b[i] == min)
+            {
+                ++min;
+            }
+        }
+    }
+    cout << min << endl;
+}
+
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a;
+        cin >> a;
+        int b[a];
+        for (int i = 0; i < a; i++)
+        {
+            cin >> b[i];
+        }
+        xuly(a, b);
+    }
+}
