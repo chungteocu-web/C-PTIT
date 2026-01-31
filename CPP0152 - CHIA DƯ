@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+int xuly(int a, int b)
+{
+    for (int i = 1; i < b; i++)
+    {
+        if (a * i % b == 1)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a, b;
+        cin >> a >> b;
+        cout << xuly(a, b) << endl;
+    }
+}
