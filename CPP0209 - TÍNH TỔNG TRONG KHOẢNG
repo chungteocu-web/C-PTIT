@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+void xuly(vector<int> &b, int c, int d)
+{
+    int sum = 0;
+    for (int i = c - 1; i < d; i++)
+    {
+        sum += b[i];
+    }
+    cout << sum << endl;
+}
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a, c, s1, s2;
+        cin >> a >> c;
+        vector<int> b(a);
+        for (int i = 0; i < a; i++)
+        {
+            cin >> b[i];
+        }
+        while (c--)
+        {
+            cin >> s1 >> s2;
+            xuly(b, s1, s2);
+        }
+    }
+}
