@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int count = 0, k;
+        string s1;
+        cin >> s1 >> k;
+        int scon[256] = {0};
+        for (int i = 0; i < s1.size(); i++)
+        {
+            scon[(int)s1[i]]++;
+        }
+        for (int i = 97; i <= 122; i++)
+        {
+            if (scon[i] != 0)
+            {
+                ++count;
+            }
+        }
+        if ((26 - count) > k)
+        {
+            cout << "0" << endl;
+        }
+        else
+        {
+            cout << "1" << endl;
+        }
+    }
+}
