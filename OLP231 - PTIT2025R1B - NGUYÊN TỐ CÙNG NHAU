@@ -1,0 +1,61 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <cmath>
+#include <map>
+using namespace std;
+void sanguoc(vector<int> &a, vector<int> &b)
+{
+    for (int i = 0; i < a.size(); i++)
+    {
+        for (int j = 2; j * j <= a[i]; j++)
+        {
+            if (a[i] % j == 0)
+            {
+                if (j < b.size() && b[j] == 1)
+                    for (int k = j; k < b.size(); k += j)
+                    {
+                        b[k] = 0;
+                    }
+                while (a[i] % j == 0)
+                {
+                    a[i] /= j;
+                }
+            }
+        }
+        if (a[i] > 1)
+        {
+            if (a[i] < b.size() && b[a[i]] == 1)
+            {
+                for (int k = a[i]; k < b.size(); k += a[i])
+                {
+                    b[k] = 0;
+                }
+            }
+        }
+    }
+    int sum = 0;
+    for (int i = 1; i < b.size(); i++)
+    {
+        if (b[i] == 1)
+            sum++;
+    }
+    cout << sum << endl;
+    for (int i = 1; i < b.size(); i++)
+    {
+        if (b[i] == 1)
+            cout << i << " ";
+    }
+}
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+    vector<int> a(n), b(m + 1, 1);
+    b[0] = 0;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    sanguoc(a, b);
+}
