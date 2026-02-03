@@ -1,0 +1,45 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <map>
+using namespace std;
+void sinh(int a[], int n)
+{
+    int ok = 1;
+    for (int i = 0; i < n; i++)
+    {
+        a[i] = 0;
+    }
+    while (ok)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            cout << a[i];
+        }
+        cout << " ";
+        int i = n - 1;
+        while (i >= 0 && a[i] == 1)
+        {
+            a[i] = 0;
+            i--;
+        }
+        if (i != -1)
+            a[i] = 1;
+        else
+            ok = 0;
+    }
+}
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int n;
+        cin >> n;
+        int a[n];
+        sinh(a, n);
+        cout << endl;
+    }
+}
