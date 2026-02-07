@@ -1,0 +1,42 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <map>
+#include <cmath>
+using namespace std;
+
+void daycon(long long mang[], int a)
+{
+
+    long long maxht = mang[0], tmp = mang[0];
+    for (int i = 1; i < a; i++)
+    {
+        tmp += mang[i];
+        if (tmp < mang[i])
+        {
+            tmp = mang[i];
+        }
+        if (maxht < tmp)
+        {
+            maxht = tmp;
+        }
+    }
+    cout << maxht << endl;
+}
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a;
+        cin >> a;
+        long long mang[a];
+        for (int i = 0; i < a; i++)
+        {
+            cin >> mang[i];
+        }
+        daycon(mang, a);
+    }
+}
