@@ -1,0 +1,27 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <set>
+#include <map>
+#include <cmath>
+using namespace std;
+int main()
+{
+    long long a[8] = {6, 28, 496, 8128, 33550336, 8589869056, 137438691328, 2305843008139952128};
+    int n;
+    cin >> n;
+    while (n--)
+    {
+        long long m;
+        cin >> m;
+        if (binary_search(a, a + 8, m))
+        {
+            cout << 1 << endl;
+        }
+        else
+        {
+            cout << 0 << endl;
+        }
+    }
+}
