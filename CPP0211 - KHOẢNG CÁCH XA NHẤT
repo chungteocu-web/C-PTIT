@@ -1,0 +1,50 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <set>
+#include <map>
+#include <cmath>
+using namespace std;
+int main()
+{
+    int n;
+    cin >> n;
+    while (n--)
+    {
+        int m, max = -1;
+        cin >> m;
+        vector<int> a(m), b(m);
+        for (int i = 0; i < m; i++)
+        {
+            cin >> a[i];
+        }
+        b[m - 1] = a[m - 1];
+        int rmax = a[m - 1];
+        for (int i = m - 2; i >= 0; i--)
+        {
+            if (a[i] > rmax)
+            {
+                rmax = a[i];
+            }
+            b[i] = rmax;
+        }
+        int i = 0, j = 0;
+        while (i < m && j < m)
+        {
+            if (a[i] < b[j])
+            {
+                if (max < (j - i))
+                {
+                    max = j - i;
+                }
+                j++;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        cout << max << endl;
+    }
+}
