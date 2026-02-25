@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <set>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a, b, tong = 0;
+        cin >> a >> b;
+        for (int i = a; i <= b; i++)
+        {
+            string s = to_string(i);
+            int vi1 = 0, vi2 = s.size() - 1, khacnhau = 0;
+            while (vi1 <= vi2)
+            {
+                if (s[vi1] != s[vi2])
+                {
+                    khacnhau++;
+                }
+                vi1++;
+                vi2--;
+            }
+            if (khacnhau == 1 || khacnhau == 0)
+            {
+                ++tong;
+            }
+        }
+        cout << tong << endl;
+    }
+}
