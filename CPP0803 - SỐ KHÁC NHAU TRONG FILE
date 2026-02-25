@@ -1,0 +1,20 @@
+#include <iostream>
+#include <utility>
+#include <map>
+#include <fstream>
+using namespace std;
+int main()
+{
+    map<int, int> mp;
+    ifstream f("DATA.in");
+    int m;
+    while (f >> m)
+    {
+        mp[m]++;
+    }
+    for (pair<int,int> x : mp)
+    {
+        cout << x.first << " " << x.second << endl;
+    }
+    f.close();
+}
