@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <deque>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a, b, maxso = -1;
+        cin >> a >> b;
+        vector<int> m1(a);
+        deque<int> dp;
+        for (int i = 0; i < a; i++)
+        {
+            cin >> m1[i];
+        }
+        for (int i = 0; i < m1.size(); i++)
+        {
+            if (!dp.empty() && dp.front() == i - b)
+                dp.pop_front();
+            while (!dp.empty() && m1[i] > m1[dp.back()])
+                dp.pop_back();
+            dp.push_back(i);
+            if (i >= b - 1)
+                cout << m1[dp.front()] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
