@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <set>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        string s;
+        cin >> s;
+        int tong = 0, tmp = 0;
+        for (int i = s.size() - 1; i >= 0; i--)
+        {
+            tmp += ((s[i] == '0') ? 1 : 0);
+            if (s[i] == '1')
+            {
+                if (tmp > 1)
+                {
+                    tong += 3;
+                    tmp -= 2;
+                }
+            }
+        }
+        cout << tong << "\n";
+    }
+    return 0;
+}
