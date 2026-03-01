@@ -1,0 +1,68 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <deque>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+const int so = 20005;
+int somu[so], ketqua[so], sohien = 0;
+void luutru(int so, int check)
+{
+    for (int i = 2; i * i <= so; i++)
+    {
+        while (so % i == 0)
+        {
+            somu[i] += check;
+            so /= i;
+        }
+    }
+    if (so > 1)
+    {
+        somu[so] += check;
+    }
+}
+void nhan(int a)
+{
+    int nho = 0;
+    for (int i = 0; i <= sohien; i++)
+    {
+        int tmp = ketqua[i] * a + nho;
+        ketqua[i] = tmp % 10;
+        nho = tmp / 10;
+    }
+    while (nho != 0)
+    {
+        sohien++;
+        ketqua[sohien] = nho % 10;
+        nho /= 10;
+    }
+}
+int main()
+{
+    int n;
+    cin >> n;
+    n++;
+    for (int i = n + 2; i <= 2 * n; i++)
+    {
+        luutru(i, 1);
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        luutru(i, -1);
+    }
+    ketqua[0] = 1;
+    for (int i = 0; i < so; i++)
+    {
+        while (somu[i] > 0)
+        {
+            nhan(i);
+            somu[i]--;
+        }
+    }
+    for (int i = sohien; i >= 0; i--)
+    {
+        cout << ketqua[i];
+    }
+}
