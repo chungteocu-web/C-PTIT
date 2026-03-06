@@ -1,0 +1,118 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include <set>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+class khachhang
+{
+private:
+    string makh, tenkh, gioitinh, ngaysinh, diachi;
+
+public:
+    friend class hoadon;
+    friend void nhap(khachhang &a, int i)
+    {
+        if (i + 1 < 10)
+            a.makh = "KH00";
+        else
+            a.makh = "KH0";
+        a.makh += to_string(i + 1);
+        getline(cin, a.tenkh);
+        getline(cin, a.gioitinh);
+        getline(cin, a.ngaysinh);
+        getline(cin, a.diachi);
+    }
+};
+class mathang
+{
+private:
+    string mah, tenh, donvi;
+    long long mua, ban;
+
+public:
+    friend class hoadon;
+    friend void nhap(mathang &a, int i)
+    {
+        if (i + 1 < 10)
+            a.mah = "MH00";
+        else
+            a.mah = "MH0";
+        a.mah += to_string(i + 1);
+        getline(cin, a.tenh);
+        getline(cin, a.donvi);
+        cin >> a.mua >> a.ban;
+        cin.ignore();
+    }
+};
+class hoadon
+{
+private:
+    string mahd, makhref, mahref;
+    long long sl;
+
+public:
+    friend void nhap(hoadon &a, int i)
+    {
+        if (i + 1 < 10)
+            a.mahd = "HD00";
+        else if (i + 1 < 100)
+            a.mahd = "HD0";
+        else
+            a.mahd = "HD";
+        a.mahd += to_string(i + 1);
+        cin >> a.makhref >> a.mahref >> a.sl;
+        cin.ignore();
+    }
+    void xuat(khachhang ds1[], int n, mathang ds2[], int m)
+    {
+        cout << mahd << " ";
+        for (int i = 0; i < n; i++)
+        {
+            if (ds1[i].makh == makhref)
+            {
+                cout << ds1[i].tenkh  << " " << ds1[i].diachi << " ";
+            }
+        }
+        for (int i = 0; i < m; i++)
+        {
+            if (ds2[i].mah == mahref)
+            {
+                cout << ds2[i].tenh << " " << ds2[i].donvi << " " << ds2[i].mua << " " << ds2[i].ban << " " << sl << " " << sl * ds2[i].ban;
+            }
+        }
+        cout << endl;
+    }
+};
+
+int main()
+{
+    khachhang ds1[20];
+    mathang ds2[40];
+    hoadon ds3[100];
+    int n, m, k;
+    cin >> n;
+    cin.ignore();
+    for (int i = 0; i < n; i++)
+    {
+        nhap(ds1[i], i);
+    }
+    cin >> m;
+    cin.ignore();
+    for (int i = 0; i < m; i++)
+    {
+        nhap(ds2[i], i);
+    }
+    cin >> k;
+    cin.ignore();
+    for (int i = 0; i < k; i++)
+    {
+        nhap(ds3[i], i);
+    }
+    for (int i = 0; i < k; i++)
+    {
+        ds3[i].xuat(ds1, n, ds2, m);
+    }
+}
