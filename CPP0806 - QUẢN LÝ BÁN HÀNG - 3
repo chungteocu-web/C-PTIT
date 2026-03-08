@@ -1,0 +1,122 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include <set>
+#include <stdbool.h>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+#include <fstream>
+using namespace std;
+class KhachHang;
+class MatHang;
+class HoaDon;
+map<string, MatHang> ms;
+map<string, KhachHang> mp;
+class KhachHang
+{
+private:
+    string makh, tenkh, gioitinh, diachi, ngay;
+    static int num;
+
+public:
+    friend class HoaDon;
+    friend ostream &operator<<(ostream &out, HoaDon &a);
+    friend ifstream &operator>>(ifstream &in, KhachHang &a)
+    {
+        if (num < 10)
+            a.makh = "KH00";
+        else
+            a.makh = "KH0";
+        a.makh += to_string(num++);
+        getline(in >> ws, a.tenkh);
+        getline(in, a.gioitinh);
+        getline(in, a.ngay);
+        getline(in, a.diachi);
+        mp[a.makh] = a;
+        return in;
+    }
+};
+int KhachHang::num = 1;
+class MatHang
+{
+private:
+    string mah, tenh, donvi;
+    long long mua, ban;
+    static int num;
+
+public:
+    friend class HoaDon;
+    friend ostream &operator<<(ostream &out, HoaDon &a);
+    friend ifstream &operator>>(ifstream &in, MatHang &a)
+    {
+        if (num < 10)
+            a.mah = "MH00";
+        else
+            a.mah = "MH0";
+        a.mah += to_string(num++);
+        getline(in >> ws, a.tenh);
+        getline(in, a.donvi);
+        in >> a.mua >> a.ban;
+        ms[a.mah] = a;
+        return in;
+    }
+};
+int MatHang::num = 1;
+class HoaDon
+{
+private:
+    string mahd, kh, mathang;
+    long long sl;
+    static int num;
+
+public:
+    friend ifstream &operator>>(ifstream &in, HoaDon &a)
+    {
+        if (num < 10)
+            a.mahd = "HD00";
+        else
+            a.mahd = "HD0";
+        a.mahd += to_string(num++);
+        in >> a.kh >> a.mathang >> a.sl;
+        return in;
+    }
+    friend ostream &operator<<(ostream &out, HoaDon &a)
+    {
+        out << a.mahd << " " << mp[a.kh].tenkh << " " << mp[a.kh].diachi << " " << ms[a.mathang].tenh << " "<<ms[a.mathang].donvi<<" ";
+        out << ms[a.mathang].mua << " " << ms[a.mathang].ban << " " << a.sl << " " << a.sl * ms[a.mathang].ban << endl;
+        return out;
+    }
+};
+int HoaDon::num = 1;
+int main()
+{
+    ifstream kh("KH.in");
+    ifstream mh("MH.in");
+    ifstream hd("HD.in");
+    KhachHang dskh[20];
+    MatHang dsmh[40];
+    HoaDon dshd[100];
+    int m;
+    kh >> m;
+    for (int i = 0; i < m; i++)
+    {
+        kh >> dskh[i];
+    }
+    int n;
+    mh >> n;
+    for (int i = 0; i < n; i++)
+    {
+        mh >> dsmh[i];
+    }
+    int k;
+    hd >> k;
+    for (int i = 0; i < k; i++)
+    {
+        hd >> dshd[i];
+    }
+    for (int i = 0; i < k; i++)
+    {
+        cout << dshd[i];
+    }
+}
