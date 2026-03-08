@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include <set>
+#include <stdbool.h>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+#include <fstream>
+using namespace std;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a, dem = 0;
+        cin >> a;
+        int matran[a];
+        for (int i = 0; i < a; i++)
+        {
+            cin >> matran[i];
+        }
+        int l = 0, r = a - 1;
+        while (l <= r)
+        {
+            if (matran[r] == matran[l])
+            {
+                r--, l++;
+            }
+            else if (matran[r] > matran[l])
+            {
+                matran[l + 1] += matran[l];
+                l += 1;
+                dem++;
+            }
+            else if (matran[r] < matran[l])
+            {
+                matran[r - 1] += matran[r];
+                r -= 1;
+                dem++;
+            }
+        }
+        cout << dem << endl;
+    }
+}
