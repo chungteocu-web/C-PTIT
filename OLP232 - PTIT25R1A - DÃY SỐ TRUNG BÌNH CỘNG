@@ -1,0 +1,59 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <set>
+using namespace std;
+int main()
+{
+    long long m, sum = 0;
+    cin >> m;
+    map<int, int> mp;
+    vector<int> a(m);
+    for (int i = 0; i < m; i++)
+    {
+        cin >> a[i];
+        mp[a[i]]++;
+    }
+    sort(a.begin(), a.end());
+    for (int i = 0; i < m; i++)
+    {
+        int check2 = 0;
+        long long tmp = 3 * a[i];
+        for (int j = 0; j < i && check2 == 0; j++)
+        {
+            if (i == j)
+                continue;
+            int r = m - 1, l = 0;
+            while (l < r)
+            {
+                if (l == j)
+                {
+                    l++;
+                    continue;
+                }
+                if (r == j)
+                {
+                    r--;
+                    continue;
+                }
+                long long tmp3 = a[l] + a[r] + a[j];
+                if (tmp3 == tmp)
+                {
+                    check2 = 1;
+                    ++sum;
+                    break;
+                }
+                else if (tmp3 < tmp)
+                {
+                    l++;
+                }
+                else
+                {
+                    r--;
+                }
+            }
+        }
+    }
+    cout << sum << endl;
+}
