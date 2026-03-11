@@ -1,0 +1,58 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+using namespace std;
+int a[10000005] = {0};
+vector<int> prime;
+void sangnt()
+{
+    a[0] = a[1] = 1;
+    for (int i = 2; i * i <= 10000000; i++)
+    {
+        if (a[i] == 0)
+        {
+            for (int j = i * i; j < 10000000; j += i)
+            {
+                if (a[j] == 0)
+                {
+                    a[j] = 1;
+                }
+            }
+        }
+    }
+    for (int i = 0; i <= 10000000; i++)
+    {
+        if (a[i] == 0)
+            prime.push_back(i);
+    }
+}
+int main()
+{
+    int m;
+    sangnt();
+    cin >> m;
+    while (m--)
+    {
+        long long b;
+        cin >> b;
+        for (int i = 0; i < prime.size() && b != 0; i++)
+        {
+            int count = 0, check = 0;
+            while (b % prime[i] == 0)
+            {
+                ++count;
+                check = 1;
+                b /= prime[i];
+            }
+            if (check == 1)
+                cout << prime[i] << "  " << count << endl;
+            if (b == 1)
+                break;
+        }
+        if (b > 1)
+            cout << b << " " << "1\n";
+        cout << endl;
+    }
+}
