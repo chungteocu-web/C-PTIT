@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <queue>
+using namespace std;
+long long kaede(vector<long long> &a)
+{
+    long long maxht = a[0], maxnhat = a[0];
+    for (int i = 1; i < a.size(); i++)
+    {
+        maxht = max(maxht + a[i], a[i]);
+        maxnhat = max(maxht, maxnhat);
+    }
+    return maxnhat;
+}
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int a, b;
+        cin >> a >> b;
+        vector<vector<int>> matran(a, vector<int>(b));
+        for (auto &i : matran)
+            for (auto &j : i)
+                cin >> j;
+        long long ketqua = -999999999999999999;
+        for (int i = 0; i < b; i++)
+        {
+            vector<long long> tmp(a, 0);
+            for (int j = i; j < b; j++)
+            {
+                for (int k = 0; k < a; k++)
+                {
+                    tmp[k] += matran[k][j];
+                }
+                ketqua = max(ketqua, kaede(tmp));
+            }
+        }
+        cout << ketqua << endl;
+    }
+}
